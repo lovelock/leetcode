@@ -1,5 +1,6 @@
 package fun.happyhacker.a0005;
 
+
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
@@ -13,49 +14,30 @@ public class Solution {
             return str;
         }
 
-        int maxLength = 1;
-        int start = 0;
+        String s1 = "";
+        String s2 = "";
         for (int i = 0; i < str.length(); i++) {
-            int left = i - 1;
-            int right = i + 1;
-            while (check(str, left, right)) {
-
-                if (maxLength < right-left+1) {
-                    maxLength = right-left+1;
-                    start = left;
-
-                }
-
-                left--;
-                right++;
-
-            }
-
+            String tmp1 = expandAroundCenter(str, i - 1, i + 1);
+            s1 = s1.length() > tmp1.length() ? s1 : tmp1;
+            String tmp2 = expandAroundCenter(str, i, i + 1);
+            s2 = s2.length() > tmp2.length() ? s2 : tmp2;
         }
 
-        for (int i = 0; i < str.length(); i++) {
-            int left = i;
-            int right = i + 1;
-            while (check(str, left, right)) {
-                if (maxLength < right - left + 1) {
-                    maxLength = right - left + 1;
-                    start = left;
-                }
+        return s1.length() > s2.length() ? s1 : s2;
+    }
 
-                left--;
-                right++;
+    private String expandAroundCenter(String str, int left, int right) {
+        int start = 0;
+        int maxLength = 1;
+        while (left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+            if (maxLength < right - left + 1) {
+                maxLength = right - left + 1;
+                start = left;
             }
-
+            left--;
+            right++;
         }
 
         return str.substring(start, start + maxLength);
-    }
-
-    private boolean check(String str, int left, int right) {
-        if (left < 0 || right > str.length() - 1) {
-            return false;
-        }
-
-        return str.charAt(left) == str.charAt(right);
     }
 }
