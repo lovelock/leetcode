@@ -1,70 +1,78 @@
 package fun.happyhacker.a0002;
 
+import lombok.Data;
+
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 链表逐位相加，注意进位
+ */
 public class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode result = null;
-        int high = 0;
-        while (l1.next != null) {
-            int tmp = l1.val + l2.val + high;
-            if (tmp >= 10) {
-                tmp -= 10;
-                high = 1;
-            } else {
-                high = 0;
-            }
-            if (result == null) {
-                result = new ListNode(tmp);
-            } else {
-                result.next = new ListNode(tmp);
-            }
-        }
 
-        return result;
+    public static void main(String[] args) {
+        ListNode l1 = create(Arrays.asList(2, 4, 3));
+        ListNode l2 = create(Arrays.asList(5, 6, 4));
+
+        Solution solution = new Solution();
+        ListNode result = solution.addTwoNumbers(l1, l2);
+        print(result);
     }
 
+    private static ListNode create(List<Integer> list) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode curr = dummyHead;
+        for (Integer integer : list) {
+            curr.next = new ListNode(integer);
+            curr = curr.next;
+        }
+
+        return dummyHead.next;
+    }
+
+    private static void print(ListNode listNode) {
+        ListNode p = listNode;
+
+        while (p != null) {
+            System.out.print(p.val);
+            p = p.next;
+        }
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1;
+        ListNode q = l2;
+        ListNode curr = dummyHead;
+        int carry = 0;
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            curr = curr.next;
+            if (p != null) {
+                p = p.next;
+            }
+            if (q != null) {
+                q = q.next;
+            }
+        }
+        if (carry > 0) {
+            curr.next = new ListNode(carry);
+        }
+
+        return dummyHead.next;
+    }
+
+    @Data
     public static class ListNode {
         int val;
         ListNode next;
 
         ListNode(int x) {
             val = x;
-        }
-    }
-
-    public static void main(String[] args) {
-        List<Integer> l1 = Arrays.asList(2, 4, 3);
-
-        ListNode ln1 = null;
-        ListNode ln2 = null;
-        for (Integer integer : l1) {
-            if (ln1 == null) {
-                ln1 = new ListNode(integer);
-            } else {
-                ln1.next = new ListNode(integer);
-            }
-            System.out.println(ln1.val);
-        }
-        List<Integer> l2 = Arrays.asList(5, 6, 4);
-        for (Integer integer : l2) {
-            if (ln2 == null) {
-                ln2 = new ListNode(integer);
-            } else {
-                ln2.next = new ListNode(integer);
-            }
-        }
-
-        ListNode node = ln1;
-        while (true) {
-            if (node.next != null) {
-                node = node.next;
-            } else {
-                node = null;
-                break;
-            }
-            System.out.println(node.val);
         }
     }
 }
