@@ -1,9 +1,8 @@
 package fun.happyhacker.a0002;
 
-import lombok.Data;
+import fun.happyhacker.utils.ListNode;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 链表逐位相加，注意进位
@@ -11,32 +10,12 @@ import java.util.List;
 public class Solution {
 
     public static void main(String[] args) {
-        ListNode l1 = create(Arrays.asList(2, 4, 3));
-        ListNode l2 = create(Arrays.asList(5, 6, 4));
+        ListNode l1 = ListNode.createFromList(Arrays.asList(2, 4, 3));
+        ListNode l2 = ListNode.createFromList(Arrays.asList(5, 6, 4));
 
         Solution solution = new Solution();
         ListNode result = solution.addTwoNumbers(l1, l2);
-        print(result);
-    }
-
-    private static ListNode create(List<Integer> list) {
-        ListNode dummyHead = new ListNode(0);
-        ListNode curr = dummyHead;
-        for (Integer integer : list) {
-            curr.next = new ListNode(integer);
-            curr = curr.next;
-        }
-
-        return dummyHead.next;
-    }
-
-    private static void print(ListNode listNode) {
-        ListNode p = listNode;
-
-        while (p != null) {
-            System.out.print(p.val);
-            p = p.next;
-        }
+        ListNode.print(result);
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -64,16 +43,6 @@ public class Solution {
         }
 
         return dummyHead.next;
-    }
-
-    @Data
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
     }
 }
 

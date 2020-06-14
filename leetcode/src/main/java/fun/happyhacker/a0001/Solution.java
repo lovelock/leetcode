@@ -5,12 +5,12 @@ import java.util.*;
 /**
  * Hello world!
  */
-public class TwoSum {
+public class Solution {
     public static void main(String[] args) {
         int[] sums = new int[]{3,2,4};
         int target = 6;
-        TwoSum twoSum = new TwoSum();
-        int[] result = twoSum.twoSum(sums, target);
+        Solution solution = new Solution();
+        int[] result = solution.twoSum(sums, target);
         System.out.println(Arrays.toString(result));
     }
 
