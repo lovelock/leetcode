@@ -53,4 +53,12 @@ public class ListNode {
         ListNode node = ListNode.createFromArray(new int[]{1,2,3,4,5});
         ListNode.print(node);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "val=" + val +
+                ", next=" + next +
+                '}';
+    }
 }
