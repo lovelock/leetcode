@@ -1,7 +1,10 @@
 package fun.happyhacker.utils;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class ListNode {
     public int val;
     public ListNode next;
@@ -47,18 +50,5 @@ public class ListNode {
         }
 
         return dummyHead.next;
-    }
-
-    public static void main(String[] args) {
-        ListNode node = ListNode.createFromArray(new int[]{1,2,3,4,5});
-        ListNode.print(node);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
     }
 }
