@@ -7,10 +7,15 @@ public class Solution {
     public static void main(String[] args) {
         int[][] intervals = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
 
-        Solution solution = new Solution();
-        int[][] result = solution.merge(intervals);
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(Arrays.toString(result[i]));
+        List<int[]> a = new ArrayList<>(Arrays.asList(intervals));
+
+
+        // 这么写应该就是一个惯用法，查看源码可以发现，这里只要长度小于a.length，结果都是一样的
+        int[][] r = a.toArray(new int[0][]);
+
+
+        for (int[] ints : r) {
+            System.out.println(Arrays.toString(ints));
         }
     }
 
