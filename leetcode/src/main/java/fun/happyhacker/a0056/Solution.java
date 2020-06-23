@@ -17,28 +17,37 @@ public class Solution {
         for (int[] ints : r) {
             System.out.println(Arrays.toString(ints));
         }
+
+        Solution solution = new Solution();
+        int[][] result = solution.merge(intervals);
+        for (int[] ints : result) {
+            System.out.println(Arrays.toString(ints));
+        }
     }
 
+    // 这个版本无法通过，因为后面会带空元素，不过这是不借助动态列表的方式
     public int[][] merge(int[][] intervals) {
         if (intervals.length < 2) {
             return intervals;
         }
 
-        List<int[]> result = new ArrayList<>();
+        int[][] result = new int[intervals.length][];
 
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
         int[] current = intervals[0];
-        for (int[] interval : intervals) {
-            if (interval[0] <= current[1]) {
-                current[1] = Math.max(interval[1], current[1]);
+        int j = 0;
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] <= current[1]) {
+                current[1] = Math.max(current[1], intervals[i][1]);
             } else {
-                result.add(current);
-                current = interval;
+                result[j] = current;
+                current = intervals[i];
+                j++;
             }
         }
-        result.add(current);
+        result[j] = current;
 
-        return result.toArray(new int[0][]);
+        return result;
     }
 }
