@@ -1,4 +1,4 @@
-package fun.happyhacker.a876;
+package fun.happyhacker.a0876;
 
 import fun.happyhacker.utils.ListNode;
 
