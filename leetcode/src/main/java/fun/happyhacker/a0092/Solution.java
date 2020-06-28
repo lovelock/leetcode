@@ -16,7 +16,6 @@ public class Solution {
     }
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
-
         ListNode prev = null;
         ListNode curr = head;
         ListNode next;
