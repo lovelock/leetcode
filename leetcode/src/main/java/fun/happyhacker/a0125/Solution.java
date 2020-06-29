@@ -25,26 +25,15 @@ public class Solution {
             return true;
         }
 
-        int left = 0;
-        int right = s.length() - 1;
-
-        while (left < right) {
-            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
-                left++;
-            }
-
-            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
-                right--;
-            }
-
-            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
-                return false;
-            } else {
-                left++;
-                right--;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isLetterOrDigit(s.charAt(i))) {
+                sb.append(s.charAt(i));
             }
         }
+        String s1 = sb.toString().toLowerCase();
+        String s1_rev = new StringBuffer(s1).reverse().toString();
 
-        return true;
+        return s1.equals(s1_rev);
     }
 }
