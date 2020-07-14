@@ -16,12 +16,14 @@ public class Solution {
         }
 
         ListNode curr = head;
+        ListNode next = curr.next;
 
         while (curr.next != null) {
-            if (curr.val == curr.next.val) {
-                curr.next = curr.next.next;
+            if (curr.val == next.val) {
+                next = next.next;
+                curr.next = next;
             } else {
-                curr = curr.next;
+                curr = next;
             }
         }
 
